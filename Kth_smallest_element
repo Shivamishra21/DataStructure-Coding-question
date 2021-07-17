@@ -1,0 +1,14 @@
+int kthSmallest(int arr[], int l, int r, int k) {
+        
+        //code here
+        priority_queue <int> maxh;
+        for(int i=0;i<=r;i++){
+            maxh.push(arr[i]);
+            if(maxh.size() > k){
+                maxh.pop();
+            }
+        }
+        return maxh.top();
+    }
+    
+    //it's the main logic, driver code is not present.
