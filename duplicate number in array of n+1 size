@@ -1,0 +1,21 @@
+//nums = array
+// numsSize = size of nums
+
+int findDuplicate(int* nums, int numsSize){
+
+   
+    int arr[numsSize+1];
+    int i;
+    for(i=0;i<numsSize;i++){
+        arr[i] = 0;
+    }
+    for(i=0;i<numsSize;i++){
+        if(arr[nums[i]] !=0){
+            return nums[i];
+        }
+        
+        arr[nums[i]] = 1;
+    }
+    return -1;
+
+}
