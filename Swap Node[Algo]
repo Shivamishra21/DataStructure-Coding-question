@@ -1,0 +1,84 @@
+// It is a hackkerank problem
+// Driver code is not present 
+
+//INPUT : 
+//The first line contains n, number of nodes in the tree.
+
+//Each of the next n lines contains two integers, a b, where a is the index of left child, and b is the index of right child of ith node.
+
+//Note: -1 is used to represent a null node.
+
+//The next line contains an integer, t, the size of .
+//Each of the next t lines contains an integer , each being a value .
+
+ void swapping(int root,int k,vector<int>&left,vector<int>&right){
+     queue<int>q;
+     q.push(root);
+     int level = 0;
+     while(!q.empty()){
+      
+         int count = q.size();
+         level++;
+         while(count--){
+            int data = q.front();
+            q.pop();
+            if(level%k == 0){
+                swap(left[data],right[data]); 
+            }
+            if(left[data]!=-1){
+                q.push(left[data]);
+            }
+            if(right[data]!=-1){
+                q.push(right[data]);
+            }
+         }
+     }  
+ }
+void inorder(int root,vector<int>&answer,vector<int>&left,vector<int>&right,int &n){
+    if(root == -1){
+        return;
+    }
+    
+    inorder(left[root],answer,left,right,n);
+      
+    
+    answer[n] = root;
+    n++;
+  
+    inorder(right[root],answer,left,right,n);
+}
+
+
+/*
+ * Complete the 'swapNodes' function below.
+ *
+ * The function is expected to return a 2D_INTEGER_ARRAY.
+ * The function accepts following parameters:
+ *  1. 2D_INTEGER_ARRAY indexes
+ *  2. INTEGER_ARRAY queries
+ */
+ 
+vector<vector<int>> swapNodes(vector<vector<int>> indexes, vector<int> queries) {
+    vector<int>left(indexes.size()+1,0);  
+    vector<int>right(indexes.size()+1,0);
+    vector<int>answer(indexes.size(),0);
+    vector<vector<int>>answerl;
+    
+    for(int i=0;i<indexes.size();i++){
+        left[i+1] = indexes[i][0];
+        right[i+1] = indexes[i][1];
+    }
+    int n = 0;
+    
+    while(n<queries.size()){
+        swapping(1,queries[n],left,right);   
+        cout<<"In inorder: ";
+        int x = 0;  
+        inorder(1,answer,left,right,x);
+      
+        answerl.push_back(answer);        
+        n++; 
+        
+    }
+    return answerl;   
+}
