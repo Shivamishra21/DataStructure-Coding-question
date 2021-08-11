@@ -1,0 +1,15 @@
+    # Here we are iterating over array and adding arr[i] to sum 
+    # if sum == 0 or if this sum has already occured before in that case we return true
+    
+    
+    def subArrayExists(self,arr,n):
+        
+        #Return true or false
+        sum_ = 0
+        s = set()
+        for i in arr:
+            sum_+=i
+            if sum_ in s or sum_== 0:
+                return True
+            s.add(sum_)
+        return False
